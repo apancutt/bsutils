@@ -1,0 +1,15 @@
+{
+    "name": "apancutt/bsutils",
+    "description": "JavaScript utilities for use with Twitter Bootstrap.",
+    "keywords": ["bootstrap", "js"],
+    "homepage": "http://github.com/apancutt/bsutils",
+    "authors": [
+        {
+            "name": "Adam Pancutt"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/apancutt/bsutils/issues"
+    },
+    "license": "MIT"
+}
