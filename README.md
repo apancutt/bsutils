@@ -121,7 +121,7 @@ In `_utilities.scss` add:
     var bsutils = new BsUtils();
 
     // Get the Bootstrap version (e.g. "3.3.1")
-    console.log(bsutils.module("version"));
+    console.log(bsutils.module("version").get());
 
 ### `viewport` Detect the active viewport
 
@@ -193,7 +193,7 @@ In `_utilities.scss` add:
     var bsutils = new BsUtils();
 
     // Get the current viewport (e.g. "xs", "md", etc.)
-    console.log(bsutils.module("viewport"));
+    console.log(bsutils.module("viewport").get());
 
     // Test the current viewport
     console.log(bsutils.module("viewport").is("xs")); // TRUE only if current viewport is "xs"
