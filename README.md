@@ -48,7 +48,82 @@ you required into your page in order to use them.
         }) ();
     </script>
 
-### `viewport` - Detect the active viewport
+### `version` Detect Bootstrap CSS version
+
+Support for this functionality is currently not provided by Bootstrap so you will need to compile your own Bootstrap
+LESS/SASS files for it to work.
+
+##### LESS Installation
+
+In `variables.less` add:
+
+    @version: "3.3.1"; // Replace with the version that you are using
+
+In `utilities.less` add:
+
+    .bootstrap-version {
+      &:extend(.hidden);
+      &:after {
+        content: $version
+      }
+    }
+
+##### SCSS Installation
+
+In `_variables.scss` add:
+
+    $version: "3.3.1"; // Replace with the version that you are using
+
+In `_utilities.scss` add:
+
+    .bootstrap-version {
+      @extend .hidden;
+      &:after {
+        content: $version
+      }
+    }
+
+##### Options
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>container</code></td>
+        <td><code>HTMLElement</code></td>
+        <td><code>document.body</code></td>
+        <td>Container for generated version sniffer element.</td>
+    </tr>
+    <tr>
+        <td><code>tag</code></td>
+        <td><code>string</code></td>
+        <td><code>DIV</code></td>
+        <td>HTML element tag for generated version sniffer element.</td>
+    </tr>
+</table>
+
+##### Methods
+
+<table>
+    <tr>
+        <td><code>get()</code></td>
+        <td><code>string</code></td>
+        <td>Returns the Twitter Bootstrap version.</td>
+    </tr>
+</table>
+
+##### Examples
+
+    var bsutils = new BsUtils();
+
+    // Get the Bootstrap version (e.g. "3.3.1")
+    console.log(bsutils.module("version"));
+
+### `viewport` Detect the active viewport
 
 ##### Options
 
@@ -118,7 +193,7 @@ you required into your page in order to use them.
     var bsutils = new BsUtils();
 
     // Get the current viewport (e.g. "xs", "md", etc.)
-    console.log(bsutils.module("viewport").get());
+    console.log(bsutils.module("viewport"));
 
     // Test the current viewport
     console.log(bsutils.module("viewport").is("xs")); // TRUE only if current viewport is "xs"

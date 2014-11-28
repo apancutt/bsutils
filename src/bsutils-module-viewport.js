@@ -16,7 +16,7 @@
             this._options.tag = "DIV";
         }
 
-        this._elements = null;
+        this._cache = {};
 
     };
 
@@ -36,9 +36,13 @@
         return this;
     };
 
-    Viewport.prototype._all = function() {
+    Viewport.prototype.toString = function() {
+        return this.get();
+    };
 
-        if (!this._elements) {
+    Viewport.prototype._elements = function() {
+
+        if (!this._cache.elements) {
 
             var elements = {};
             var tag = this.option("tag");
@@ -56,20 +60,16 @@
 
             }
 
-            this._elements = elements;
+            this._cache.elements = elements;
 
         }
 
-        return this._elements;
+        return this._cache.elements;
     };
 
-    Viewport.prototype.all = function() {
-        return Object.keys(this._all());
-    };
+    Viewport.prototype._element = function() {
 
-    Viewport.prototype._get = function() {
-
-        var elements = this._all();
+        var elements = this._elements();
 
         for (var id in elements) {
             if ("none" !== window.getComputedStyle(elements[id]).getPropertyValue("display")) {
@@ -80,9 +80,13 @@
         return null;
     };
 
+    Viewport.prototype.all = function() {
+        return Object.keys(this._elements());
+    };
+
     Viewport.prototype.get = function() {
 
-        var element = this._get();
+        var element = this._element();
 
         return element ? element.getAttribute("data-id") : null;
     };
