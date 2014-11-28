@@ -1,13 +1,7 @@
 (function() {
 
-    if (!window.jQuery) {
-        throw new Error("jQuery is required");
-    }
-
-    var $ = window.jQuery;
-
     var BsUtils = function(options) {
-        this._options = $.extend({}, options);
+        this._options = options || {};
         this._modules = {};
     };
 
@@ -35,7 +29,7 @@
         if (!this._modules[namespace]) {
 
             if (!registeredModules[namespace]) {
-                $.error("Unregistered module: " + namespace);
+                throw new Error("Unregistered module: " + namespace);
             }
 
             this._modules[namespace] = new registeredModules[namespace](this, this.option(namespace + "_options") );

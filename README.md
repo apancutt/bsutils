@@ -4,20 +4,16 @@ JavaScript utilities for use with [Twitter Bootstrap](http://getbootstrap.com).
 
 ## Requirements
 
-* jQuery 1.0+
 * Twitter Bootstrap 3.0+
 
 ## Installation
 
-Ensure `jQuery` and `bsutils` are included in your page, then initalize a new `BsUtils` instance:
+Ensure `bsutils-core.min.js` is included at the bottom of your page then initalize a new `BsUtils` instance:
 
-    <html>
-      <head>
-        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-      </head>
-      <body>
-        <!-- Site content -->
+        <!-- ... -->
+
         <script src="bsutils-core.min.js"></script>
+
         <script>
             (function() {
 
@@ -26,6 +22,7 @@ Ensure `jQuery` and `bsutils` are included in your page, then initalize a new `B
 
             }) ();
         </script>
+
       </body>
     </html>
 
@@ -35,19 +32,20 @@ Out-of-the-box, `bsutils` doesn't do much. The juice comes from modules. You'll 
 you required into your page in order to use them.
 
     <script src="bsutils-core.min.js"></script>
-    <script src="bsutils-mymodule.min.js"></script>
+    <script src="bsutils-module-mymodule.min.js"></script>
+
     <script>
         (function() {
 
-                var bsutils = new BsUtils({
-                    mymodule_options = {}
-                });
+            var bsutils = new BsUtils({
+                mymodule_options = {}
+            });
 
-                var mymodule = bsutils.module("mymodule"); // Will be initialized with mymodule_options
+            var mymodule = bsutils.module("mymodule"); // Will be initialized with mymodule_options
 
-                // ...
+            // ...
 
-            }) ();
+        }) ();
     </script>
 
 ### `viewport` - Detect the active viewport
@@ -63,15 +61,15 @@ you required into your page in order to use them.
     </tr>
     <tr>
         <td><code>container</code></td>
-        <td><code>jQuery</code>, <code>HTMLElement</code> or <code>string</code> (selector)</td>
-        <td><code>$(document.body)</code></td>
+        <td><code>HTMLElement</code></td>
+        <td><code>document.body</code></td>
         <td>Container for generated viewport sniffer elements.</td>
     </tr>
     <tr>
-        <td><code>template</code></td>
+        <td><code>tag</code></td>
         <td><code>string</code></td>
-        <td><code>"&lt;div/&gt;"</code></td>
-        <td>Template HTML for generated viewport sniffer elements.</td>
+        <td><code>DIV</code></td>
+        <td>HTML element tag for generated viewport sniffer elements.</td>
     </tr>
 </table>
 

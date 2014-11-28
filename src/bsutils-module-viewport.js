@@ -4,16 +4,18 @@
         throw new Error("BsUtils (core) is required");
     }
 
-    var $ = window.jQuery;
-
     var Viewport = function(bsutils, options) {
 
-        var defaults = {
-            container: $(document.body),
-            template: "<div/>"
-        };
+        this._options = options || {};
 
-        this._options = $.extend({}, defaults, options);
+        if (!this._options.container) {
+            this._options.container = document.body;
+        }
+
+        if (!this._options.tag) {
+            this._options.tag = "DIV";
+        }
+
         this._elements = null;
 
     };
@@ -38,22 +40,21 @@
 
         if (!this._elements) {
 
-            var elements = $();
-            var template = this.option("template");
+            var elements = {};
+            var tag = this.option("tag");
             var container = this.option("container");
+            var ids = [this.EXTRA_SMALL, this.SMALL, this.MEDIUM, this.LARGE];
 
-            $.each([this.EXTRA_SMALL, this.SMALL, this.MEDIUM, this.LARGE], function() {
+            for (var i = 0; i < ids.length; i++) {
 
-                var id = this.toString();
+                var element = document.createElement(tag);
+                element.setAttribute("data-id", ids[i]);
+                element.setAttribute("class", "visible-" + ids[i]);
+                container.appendChild(element);
 
-                elements = elements.add(
-                    $(template)
-                        .data("_id", id)
-                        .addClass("visible-" + id)
-                        .appendTo(container)
-                );
+                elements[ids[i]] = element;
 
-            });
+            }
 
             this._elements = elements;
 
@@ -63,21 +64,27 @@
     };
 
     Viewport.prototype.all = function() {
-
-        var ids = [];
-        this._all().each(function() {
-            ids.push($(this).data("_id"));
-        });
-
-        return ids;
+        return Object.keys(this._all());
     };
 
     Viewport.prototype._get = function() {
-        return this._all().filter(":visible");
+
+        var elements = this._all();
+
+        for (var id in elements) {
+            if ("none" !== window.getComputedStyle(elements[id]).getPropertyValue("display")) {
+                return elements[id];
+            }
+        }
+
+        return null;
     };
 
     Viewport.prototype.get = function() {
-        return this._get().data("_id");
+
+        var element = this._get();
+
+        return element ? element.getAttribute("data-id") : null;
     };
 
     Viewport.prototype._compare = function(a, b) {
@@ -86,12 +93,12 @@
             return 0;
         }
 
-        var viewports = this.all();
+        var ids = this.all();
         var index = function(value) {
 
-            var index = $.inArray(value, viewports);
+            var index = ids.indexOf(value);
             if (-1 === index) {
-                $.error("Invalid ID: " + value);
+                throw new Error("Invalid ID: " + value);
             }
 
             return index;
