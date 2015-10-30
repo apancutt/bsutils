@@ -1,0 +1,20 @@
+{
+  "name": "bsutils",
+  "version": "0.0.2",
+  "main": [
+    "dist/bsutils-core.min.js",
+    "dist/bsutils-module-version.min.js",
+    "dist/bsutils-module-viewport.min.js"
+  ],
+  "dependencies": {},
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/apancutt/bsutils.git"
+  },
+  "ignore": [
+    "bower.json",
+    "build.sh",
+    "composer.json"
+  ]
+}
